@@ -1,8 +1,9 @@
 import { View } from 'react-native';
+import Tabs from './src/navigation/Tabs';
 
 const App = () => {
   return (
-    <View></View>
+    <Tabs/>
   );
 };
 
