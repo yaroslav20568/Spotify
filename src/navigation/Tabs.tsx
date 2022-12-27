@@ -7,15 +7,16 @@ import { HomeScreen, SearchScreen, MediaLibraryScreen, PremiumScreen } from '../
 
 interface Tab {
 	name: string,
+	title: string,
 	component: any,
 	nameIcon: string
 }
 
 const TabElements: Array<Tab> = [
-	{name: 'Главная', component: HomeScreen, nameIcon: 'home'},
-	{name: 'Поиск', component: SearchScreen, nameIcon: 'search'},
-	{name: 'Mоя медиатека', component: MediaLibraryScreen, nameIcon: 'music'},
-	{name: 'Premium', component: PremiumScreen, nameIcon: 'spotify'},
+	{name: 'Home', title: 'Главная', component: HomeScreen, nameIcon: 'home'},
+	{name: 'Search', title: 'Поиск', component: SearchScreen, nameIcon: 'search'},
+	{name: 'MediaLibrary', title: 'Mоя медиатека', component: MediaLibraryScreen, nameIcon: 'music'},
+	{name: 'Premium', title: 'Premium', component: PremiumScreen, nameIcon: 'spotify'},
 ];
 
 const Tab = createBottomTabNavigator();
@@ -36,7 +37,7 @@ const Tabs = () => {
 						component={tabElement.component} 
 						options={{
 							tabBarLabel: ({ focused }) => (
-								<Text style={{color: focused ? 'white' : '#B1B7B2', marginBottom: 5}}>{tabElement.name}</Text>
+								<Text style={{color: focused ? 'white' : '#B1B7B2', marginBottom: 5}}>{tabElement.title}</Text>
 							),
 							tabBarIcon: ({ focused }) => (
 								<View style={{marginBottom: 0}}>

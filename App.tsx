@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
 import Tabs from './src/navigation/Tabs';
 import { authorize } from 'react-native-app-auth';
 

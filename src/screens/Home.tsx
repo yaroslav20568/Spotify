@@ -1,7 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { Text, Animated } from 'react-native';
+import { Animated } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { s } from "react-native-wind";
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { Header } from './../components';
 
-const Home = () => {
+interface IProps {
+	navigation: NavigationProp<ParamListBase>
+}
+
+const Home = ({ navigation }: IProps) => {
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 
 	const fadeIn = () => {
@@ -17,11 +25,11 @@ const Home = () => {
 	}, []);
 
 	return (
-		<Animated.View
-      style={{opacity: fadeAnim}}
-    >
-			<Text>Home</Text>
-		</Animated.View>
+		<LinearGradient colors={['#484C4D', '#121212']} style={{flex: 1}}>
+			<Animated.View style={[s`py-7 px-4`, {opacity: fadeAnim}]}>
+				<Header navigation={navigation} />
+			</Animated.View>
+		</LinearGradient>
 	)
 }
 

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Text, Animated } from 'react-native';
+import { s } from 'react-native-wind';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Premium = () => {
 	const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -17,11 +19,11 @@ const Premium = () => {
 	}, []);
 
 	return (
-		<Animated.View
-      style={{opacity: fadeAnim}}
-    >
-			<Text>Premium</Text>
-		</Animated.View>
+		<LinearGradient colors={['#484C4D', '#121212']} style={{flex: 1}}>
+			<Animated.View style={[s`py-7 px-4`, {opacity: fadeAnim}]}>
+				<Text>Premium</Text>
+			</Animated.View>
+		</LinearGradient>
 	)
 }
 
