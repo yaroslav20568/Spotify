@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from 'react-native-splash-screen';
-import Tabs from './src/navigation/Tabs';
 import { authorize } from 'react-native-app-auth';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+import Tabs from './src/navigation/Tabs';
 
 const App = () => {
 	useEffect(() => {
@@ -26,20 +28,22 @@ const App = () => {
 		const authState = await authorize(config);
 		await AsyncStorage.setItem('@spotify_token', authState.accessToken);
 
-		fetch(`https://api.spotify.com/v1/artists?ids=2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6`, {
-			method: 'GET',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type' : 'application/json',
-				'Authorization': `Bearer ${authState.accessToken}`
-			},
-		})
-		.then(response => response.json())
-		.then(data => console.log(data))
+		// fetch(`https://api.spotify.com/v1/artists?ids=5VKufGMVAZ6fs111xYNKnU,46rVVJwHWNS7C7MaWXd842,0oHyOQzDKjW5JVf347hue4,6HZrWacYa92nQo5zD2mjHk,6wbEgVlGqWb4I9tbMluu5Q,4ENNw1y7XuWPt7tvzoQ8Pz,1Uf3QoT2BwTN9ZW71cIiAo`, {
+		// 	method: 'GET',
+		// 	headers: {
+		// 		'Accept': 'application/json',
+		// 		'Content-Type' : 'application/json',
+		// 		'Authorization': `Bearer ${authState.accessToken}`
+		// 	},
+		// })
+		// .then(response => response.json())
+		// .then(data => console.log(data.artists))
 	};
 
   return (
-    <Tabs/>
+		<Provider store={store}>
+			<Tabs/>
+		</Provider>
   );
 };
 
