@@ -7,10 +7,10 @@ const mainData = createApi({
   endpoints: (build) => ({
     getMainData: build.query<IArtists, void>({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
-        const randomResult = await fetchWithBQ('artists?ids=5VKufGMVAZ6fs111xYNKnU,46rVVJwHWNS7C7MaWXd842,0oHyOQzDKjW5JVf347hue4,6HZrWacYa92nQo5zD2mjHk,6wbEgVlGqWb4I9tbMluu5Q,4ENNw1y7XuWPt7tvzoQ8Pz,1Uf3QoT2BwTN9ZW71cIiAo');
+        const artists = await fetchWithBQ('artists?ids=5VKufGMVAZ6fs111xYNKnU,46rVVJwHWNS7C7MaWXd842,0oHyOQzDKjW5JVf347hue4,6HZrWacYa92nQo5zD2mjHk,6wbEgVlGqWb4I9tbMluu5Q,4ENNw1y7XuWPt7tvzoQ8Pz,1Uf3QoT2BwTN9ZW71cIiAo');
 
 				return {
-					data: randomResult.data
+					data: artists.data
 				};
       },
     }),

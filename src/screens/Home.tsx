@@ -11,10 +11,10 @@ interface IProps {
 }
 
 const Home = ({ navigation }: IProps) => {
-	const fadeAnim = useRef(new Animated.Value(0)).current;
-	
 	const { data } = useGetMainDataQuery();
 	console.log(data?.artists);
+
+	const fadeAnim = useRef(new Animated.Value(0)).current;
 
 	const fadeIn = () => {
     Animated.timing(fadeAnim, {
