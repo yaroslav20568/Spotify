@@ -11,8 +11,7 @@ interface IProps {
 }
 
 const Home = ({ navigation }: IProps) => {
-	const { data } = useGetMainDataQuery();
-	console.log(data?.artists);
+	const { data } = useGetMainDataQuery('');
 
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 

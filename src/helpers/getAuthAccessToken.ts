@@ -6,7 +6,7 @@ const getAuthAccessToken = async () => {
 		clientId: '83abeb6d2a8d4a49ae3c509934b502dd',
 		clientSecret: '4136aadbc6594f1b8e867801c1022ccb',
 		redirectUrl: 'com.myapp:/oauth',
-		scopes: ['user-read-email', 'playlist-modify-public', 'user-read-private'],
+		scopes: ['user-read-email', 'playlist-read-private', 'user-library-read', 'playlist-modify-public', 'user-read-private'],
 		serviceConfiguration: {
 			authorizationEndpoint: 'https://accounts.spotify.com/authorize',
 			tokenEndpoint: 'https://accounts.spotify.com/api/token'
@@ -15,17 +15,6 @@ const getAuthAccessToken = async () => {
 	
 	const authState = await authorize(config);
 	await AsyncStorage.setItem('@spotify_token', authState.accessToken);
-
-	// fetch(`https://api.spotify.com/v1/artists?ids=5VKufGMVAZ6fs111xYNKnU,46rVVJwHWNS7C7MaWXd842,0oHyOQzDKjW5JVf347hue4,6HZrWacYa92nQo5zD2mjHk,6wbEgVlGqWb4I9tbMluu5Q,4ENNw1y7XuWPt7tvzoQ8Pz,1Uf3QoT2BwTN9ZW71cIiAo`, {
-	// 	method: 'GET',
-	// 	headers: {
-	// 		'Accept': 'application/json',
-	// 		'Content-Type' : 'application/json',
-	// 		'Authorization': `Bearer ${authState.accessToken}`
-	// 	},
-	// })
-	// .then(response => response.json())
-	// .then(data => console.log(data.artists))
 };
 
 export default getAuthAccessToken;
