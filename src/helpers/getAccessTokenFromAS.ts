@@ -10,4 +10,3 @@ const getAccessTokenFromAS = async () => {
 }
 
 export default getAccessTokenFromAS;
-

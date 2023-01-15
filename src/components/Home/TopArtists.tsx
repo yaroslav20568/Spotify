@@ -4,16 +4,16 @@ import { s } from "react-native-wind";
 import { IArtist } from '../../types';
 
 type IProps =	{
-	artistItems: Array<IArtist> | undefined
+	topArtistItems: Array<IArtist> | undefined
 };
 
-const Artists = ({ artistItems }: IProps) => {
+const TopArtists = ({ topArtistItems }: IProps) => {
 	return (
 		<View>
-			<Text style={s`text-3xl font-bold text-white my-5`}>Top Artists</Text>
+			<Text style={s`text-3xl font-bold text-white mx-4 mb-3`}>Top Artists</Text>
 
 			<FlatList
-				data={artistItems}
+				data={topArtistItems}
 				renderItem={({ item }) => <Artist {...item} />}
 				horizontal
 				showsHorizontalScrollIndicator={false}
@@ -24,15 +24,15 @@ const Artists = ({ artistItems }: IProps) => {
 
 const Artist = ({ name, images }: IArtist) => {
 	return (
-		<TouchableOpacity style={s`items-center mr-5`}>
+		<TouchableOpacity style={[s`items-center mx-4`, {width: 140}]}>
 			<Image
 				source={{uri: images[2].url}}
-				style={[s`rounded-full mb-1`, {width: images[2].width * 0.85, height: images[2].height * 0.85}]}
-				resizeMode='contain'
+				style={[s`rounded-full mb-2`, {width: 140, height: 140}]}
+				resizeMode='cover'
 			/>
-			<Text style={s`text-lg text-white`}>{name}</Text>
+			<Text style={[s`text-lg text-white`, {lineHeight: 20}]}>{name}</Text>
 		</TouchableOpacity>
 	)
 }
 
-export default Artists;
+export default TopArtists;

@@ -5,12 +5,26 @@ interface IImage {
 }
 
 interface IArtist {
+	id: string;
 	name: string;
 	images: Array<IImage>
 }
 
-interface IArtists {
-	artists: Array<IArtist>
+interface ITrack {
+	track: {
+		id: string;
+		name: string;
+		album: {
+			images: Array<IImage>;
+		};
+		artists: Array<IArtist>;
+	}
 }
 
-export type { IImage, IArtist, IArtists };
+interface IAlbum {
+	id: string;
+	name: string;
+	images: Array<IImage>;
+}
+
+export type { IImage, IArtist, ITrack, IAlbum };

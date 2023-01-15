@@ -1,17 +1,37 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { IArtists } from '../../types';
+import { IArtist, ITrack, IAlbum } from '../../types';
+import { topArtistsIds, topAlbumsIds } from '../../constants';
+import { shuffle } from './../../helpers';
+
+interface IArtists {
+	artists: Array<IArtist>;
+}
+
+interface ITracks {
+	items: Array<ITrack>;
+}
+
+interface IAlbums {
+	albums: Array<IAlbum>;
+}
+
+interface IData {
+	topArtists: Array<IArtist>;
+	myTracks: Array<ITrack>;
+	topAlbums: Array<IAlbum>;
+}
 
 const mainData = createApi({
 	reducerPath: 'mainDataApi',
 	baseQuery: fetchBaseQuery({ baseUrl: 'https://api.spotify.com/v1/' }),
   endpoints: (build) => ({
-    getMainData: build.query<IArtists, string>({
+    getMainData: build.query<IData, string>({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
 				const token = await AsyncStorage.getItem('@spotify_token');
 
-				const artistsResp = await fetchWithBQ({
-					url: `artists?ids=5VKufGMVAZ6fs111xYNKnU,46rVVJwHWNS7C7MaWXd842,0oHyOQzDKjW5JVf347hue4,6HZrWacYa92nQo5zD2mjHk,6wbEgVlGqWb4I9tbMluu5Q,4ENNw1y7XuWPt7tvzoQ8Pz,1Uf3QoT2BwTN9ZW71cIiAo`, 
+				const topArtistsResp = await fetchWithBQ({
+					url: `artists?ids=${shuffle(topArtistsIds)}`, 
 					method: 'GET',
 					headers: {
 						'Accept': 'application/json',
@@ -20,8 +40,36 @@ const mainData = createApi({
 					},
 				})
 
+				const myTracksResp = await fetchWithBQ({
+          url: 'me/tracks?limit=10', 
+          method: 'GET',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type' : 'application/json',
+						'Authorization': `Bearer ${token}`
+					},
+        })
+
+				const topAlbumsResp = await fetchWithBQ({
+          url: `albums?ids=${shuffle(topAlbumsIds)}`, 
+          method: 'GET',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type' : 'application/json',
+						'Authorization': `Bearer ${token}`
+					},
+        })
+
+				const topArtistsData = topArtistsResp.data as IArtists;
+				const myTracksData = myTracksResp.data as ITracks;
+				const topAlbumsData = topAlbumsResp.data as IAlbums;
+
 				return {
-					data: artistsResp.data
+					data: {
+						topArtists: topArtistsData.artists,
+						myTracks: myTracksData.items,
+						topAlbums: topAlbumsData.albums
+					}
 				};
       },
     }),

@@ -12,7 +12,7 @@ interface IProps {
 
 const Header = ({ navigation }: IProps) => {
 	return (
-		<View style={s`flex-row items-center justify-between`}>
+		<View style={s`flex-row items-center justify-between mx-4 mb-5`}>
 			<Text style={s`text-3xl font-bold text-white`}>Good evening</Text>
 			
 			<View style={s`flex-row`}>
