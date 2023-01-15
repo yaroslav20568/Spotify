@@ -16,6 +16,7 @@
     "@react-navigation/native": "^6.0.13",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/react-native-vector-icons": "^6.4.12",
+    "is-spotify-token-valid": "^1.0.0",
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-app-auth": "^6.4.3",

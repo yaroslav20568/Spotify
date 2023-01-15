@@ -12,8 +12,8 @@ interface IProps {
 }
 
 const Home = ({ navigation }: IProps) => {
-	const { data } = useGetMainDataQuery('');
-
+	const { data, isLoading } = useGetMainDataQuery('');
+	console.log(isLoading)
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 
 	const fadeIn = () => {
