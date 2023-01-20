@@ -8,12 +8,12 @@ import { useGetMainDataQuery } from './../redux/query/mainData';
 import { ScrollView } from 'react-native-gesture-handler';
 
 interface IProps {
-	navigation: NavigationProp<ParamListBase>
+	navigation: NavigationProp<ParamListBase>;
 }
 
 const Home = ({ navigation }: IProps) => {
 	const { data, isLoading } = useGetMainDataQuery('');
-	console.log(isLoading)
+
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 
 	const fadeIn = () => {
@@ -33,9 +33,9 @@ const Home = ({ navigation }: IProps) => {
 			<ScrollView>
 				<Animated.View style={[s`py-7 /*px-4*/`, {opacity: fadeAnim}]}>
 					<Header navigation={navigation} />
-					<TopArtists topArtistItems={data?.topArtists} />
-					<MyTracks myTracksItems={data?.myTracks} />
-					<TopAlbums topAlbumsItems={data?.topAlbums} />
+					<TopArtists topArtistItems={data?.topArtists} isLoading={isLoading} />
+					<MyTracks myTracksItems={data?.myTracks} isLoading={isLoading} />
+					<TopAlbums topAlbumsItems={data?.topAlbums} isLoading={isLoading} />
 				</Animated.View>
 			</ScrollView>
 		</LinearGradient>

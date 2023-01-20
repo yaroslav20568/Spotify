@@ -2,22 +2,32 @@ import React from 'react';
 import { Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import { s } from "react-native-wind";
 import { IArtist } from '../../types';
+import { ArtistLoader } from '../index';
 
 type IProps =	{
-	topArtistItems: Array<IArtist> | undefined
+	topArtistItems: Array<IArtist> | undefined;
+	isLoading: boolean;
 };
 
-const TopArtists = ({ topArtistItems }: IProps) => {
+const TopArtists = ({ topArtistItems, isLoading }: IProps) => {
 	return (
 		<View>
 			<Text style={s`text-3xl font-bold text-white mx-4 mb-3`}>Top Artists</Text>
 
-			<FlatList
-				data={topArtistItems}
-				renderItem={({ item }) => <Artist {...item} />}
-				horizontal
-				showsHorizontalScrollIndicator={false}
-			/>
+			{isLoading ? 
+				<FlatList
+					data={Array(8)}
+					renderItem={({ item }) => <ArtistLoader />}
+					horizontal
+					showsHorizontalScrollIndicator={false}
+				/> : 
+				<FlatList
+					data={topArtistItems}
+					renderItem={({ item }) => <Artist {...item} />}
+					horizontal
+					showsHorizontalScrollIndicator={false}
+				/>
+			}
 		</View>
 	)
 }
