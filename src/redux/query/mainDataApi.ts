@@ -22,7 +22,7 @@ interface IData {
 	topAlbums: Array<IAlbum>;
 }
 
-const mainData = createApi({
+const mainDataApi = createApi({
 	reducerPath: 'mainDataApi',
 	baseQuery: fetchBaseQuery({ baseUrl: 'https://api.spotify.com/v1/' }),
   endpoints: (build) => ({
@@ -76,5 +76,5 @@ const mainData = createApi({
   }),
 })
 
-export { mainData };
-export const { useGetMainDataQuery } = mainData;
+export { mainDataApi };
+export const { useGetMainDataQuery } = mainDataApi;

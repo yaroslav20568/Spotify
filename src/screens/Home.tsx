@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { s } from "react-native-wind";
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { Header, TopArtists, MyTracks, TopAlbums } from './../components';
-import { useGetMainDataQuery } from './../redux/query/mainData';
+import { useGetMainDataQuery } from '../redux/query/mainDataApi';
 import { ScrollView } from 'react-native-gesture-handler';
 
 interface IProps {
@@ -33,9 +33,19 @@ const Home = ({ navigation }: IProps) => {
 			<ScrollView>
 				<Animated.View style={[s`py-7 /*px-4*/`, {opacity: fadeAnim}]}>
 					<Header navigation={navigation} />
-					<TopArtists topArtistItems={data?.topArtists} isLoading={isLoading} />
-					<MyTracks myTracksItems={data?.myTracks} isLoading={isLoading} />
-					<TopAlbums topAlbumsItems={data?.topAlbums} isLoading={isLoading} />
+					<TopArtists 
+						topArtistItems={data?.topArtists} 
+						isLoading={isLoading} 
+						navigation={navigation} 
+					/>
+					<MyTracks 
+						myTracksItems={data?.myTracks} 
+						isLoading={isLoading} 
+					/>
+					<TopAlbums 
+						topAlbumsItems={data?.topAlbums} 
+						isLoading={isLoading} 
+					/>
 				</Animated.View>
 			</ScrollView>
 		</LinearGradient>

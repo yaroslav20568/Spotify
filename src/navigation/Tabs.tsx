@@ -3,7 +3,8 @@ import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { HomeScreen, SearchScreen, MediaLibraryScreen, PremiumScreen } from '../screens';
+import { SearchScreen, MediaLibraryScreen, PremiumScreen } from '../screens';
+import { HomeScreenStacks } from './Stacks';
 
 interface Tab {
 	name: string,
@@ -12,14 +13,14 @@ interface Tab {
 	nameIcon: string
 }
 
+const Tab = createBottomTabNavigator();
+
 const TabElements: Array<Tab> = [
-	{name: 'Home', title: 'Главная', component: HomeScreen, nameIcon: 'home'},
+	{name: 'Home', title: 'Главная', component: HomeScreenStacks, nameIcon: 'home'},
 	{name: 'Search', title: 'Поиск', component: SearchScreen, nameIcon: 'search'},
 	{name: 'MediaLibrary', title: 'Mоя медиатека', component: MediaLibraryScreen, nameIcon: 'music'},
 	{name: 'Premium', title: 'Premium', component: PremiumScreen, nameIcon: 'spotify'},
 ];
-
-const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   return (
